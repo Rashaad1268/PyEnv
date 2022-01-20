@@ -1,4 +1,4 @@
 # PyEnv
 
 ## Install using
-> `pip install git+https://github.com/Rashaad1268/PyEnv.git`
+> `pip install git+https://github.com/Rashaad1268/PyEnv.git#egg=pyenv`
