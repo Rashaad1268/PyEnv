@@ -10,7 +10,7 @@ setuptools.setup(
     version="0.1.0",
     description="A module to parse values from text files",
     long_description=README,
-    packages=["pyenv"],
+    py_modules=["pyenv"],
     long_description_content_type="text/markdown",
     url="https://github.com/Rashaad1268/PyEnv",
     author="Rashaad",
