@@ -103,8 +103,3 @@ class Env:
 
     def __getitem__(self, item):
         return self.values[item]
-
-    def __setitem__(self, key, value):
-        self.values[key] = value
-        with self.path.open("a") as file:
-            file.write(f"{key}={value}")
