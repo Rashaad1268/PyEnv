@@ -29,3 +29,8 @@ print(env["list"])
 print(env["dict"])
 # Output: {'key': 'value', 'pi': Decimal('3.141'), 10: 20}
 ```
+
+### Notes
+Parsing nested values like `[[1, 2, 3], [1, 2, 3], [1, 2, 3]]`
+don't work. Check [#1](https://github.com/Rashaad1268/PyEnv/issues/1)
+for additional information
