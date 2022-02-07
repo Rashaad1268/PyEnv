@@ -44,8 +44,8 @@ def _convert_dictionary(string):
     return dictionary
 
 
-def _convert_value(string):
-    for regex, converter in VALUE_CONVERTERS.items():
+def _convert_value(string, value_converters=VALUE_CONVERTERS):
+    for regex, converter in value_converters.items():
 
         if match := re.match(regex, string, flags=re.IGNORECASE):
             return converter(match.group(1))
@@ -75,9 +75,27 @@ class Env:
         converted_values = {}
 
         for name, value in self.raw_values:
-            converted_values[name] = _convert_value(value)
+            converted_values[name] = _convert_value(value, self.value_converters)
 
         self._values = converted_values
+
+    @classmethod
+    def parse(cls, string, extra_value_converters={}):
+        """Method for parsing a string manually"""
+        raw_values = re.findall(ENV_PARSE_REGEX, string)
+        value_converters = VALUE_CONVERTERS | extra_value_converters
+
+        converted_values = {}
+
+        for name, value in raw_values:
+            converted_values[name] = _convert_value(value, value_converters)
+
+        env = cls.__new__(cls)
+        env.value_converters = value_converters
+        env.raw_values = raw_values
+        env._values = converted_values
+        env.path = None
+        return env
 
     @property
     def values(self):
